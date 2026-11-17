@@ -1,0 +1,87 @@
+// ============================================================================
+// SCHÉMA DE BASE DE DONNÉES POULS (PostgreSQL / Supabase / Neon)
+// Prêt à être migré avec `npx prisma migrate dev` dès que DATABASE_URL est défini
+// ============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(cuid())
+  email         String        @unique
+  name          String?
+  plan          String        @default("FREE") // FREE | PRO
+  whatsappPhone String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  products      SaasProduct[]
+}
+
+model SaasProduct {
+  id                  String          @id @default(cuid())
+  userId              String
+  user                User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                String
+  url                 String?
+  niche               String          @default("b2b_prod")
+  // Jeton Stripe en lecture seule (chiffré via AES-256-GCM avant stockage)
+  stripeEncryptedKey  String?
+  visitors            Int             @default(1200)
+  freeUsers           Int             @default(0)
+  payingUsers         Int             @default(0)
+  mrr                 Float           @default(0)
+  growthPct           Float           @default(0)
+  churnPct            Float           @default(0)
+  marginPct           Float           @default(75)
+  ageMonths           Int             @default(12)
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  monitors            UptimeMonitor[]
+  snapshots           MetricSnapshot[]
+}
+
+model MetricSnapshot {
+  id            String      @id @default(cuid())
+  productId     String
+  product       SaasProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  mrr           Float
+  payingUsers   Int
+  freeUsers     Int
+  churnPct      Float
+  valuationLow  Float
+  valuationMid  Float
+  valuationHigh Float
+  recordedAt    DateTime    @default(now())
+}
+
+model UptimeMonitor {
+  id            String      @id @default(cuid())
+  productId     String
+  product       SaasProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label         String
+  targetUrl     String
+  intervalSec   Int         @default(60)
+  alertEmail    String?
+  lastStatus    Int?
+  lastLatencyMs Int?
+  isUp          Boolean     @default(true)
+  lastCheckedAt DateTime?
+  createdAt     DateTime    @default(now())
+}
+
+model WaitlistEntry {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  source            String   @default("landing")
+  niche             String?
+  payingUsers       Int?
+  estimatedMedian   Float?
+  createdAt         DateTime @default(now())
+}
+
