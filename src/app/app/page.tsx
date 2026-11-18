@@ -475,22 +475,20 @@ export default function SaasAppPage() {
     return (
       <div
         suppressHydrationWarning
-        className="min-h-screen bg-[#0B0A14] text-white flex flex-col items-center justify-center p-6 space-y-4"
+        className="min-h-screen bg-bg text-text flex flex-col items-center justify-center p-6 space-y-4"
       >
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#5B3DF5] via-[#EC4899] to-[#FFB84D] p-[2px] animate-pulse">
-          <div className="w-full h-full rounded-[14px] bg-[#0B0A14] flex items-center justify-center">
-            <svg className="w-6 h-6 text-[#FFB84D]" viewBox="0 0 32 32" fill="none">
-              <path
-                d="M4 17h5l3-7 5 13 3-6h8"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
-        <p className="text-sm font-mono text-white/60">Chargement de Pouls Studio...</p>
+        <svg className="h-10 w-10 animate-pulse" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="var(--accent)" />
+          <path
+            d="M5 17h5l3-7 5 13 3-6h6"
+            fill="none"
+            stroke="var(--on-accent)"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <p className="text-sm text-text-2">Chargement de Pouls Studio...</p>
       </div>
     );
   }
@@ -509,26 +507,19 @@ export default function SaasAppPage() {
               <span>Accueil</span>
             </Link>
 
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-[#5B3DF5] via-[#EC4899] to-[#FFB84D] p-[1.5px]">
-                <div className="w-full h-full rounded-[10px] bg-[#0B0A14] flex items-center justify-center">
-                  <svg className="w-3.5 h-3.5 text-[#FFB84D]" viewBox="0 0 32 32" fill="none">
-                    <path
-                      d="M4 17h5l3-7 5 13 3-6h8"
-                      stroke="currentColor"
-                      strokeWidth="3.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <span className="font-bold tracking-tight text-white flex items-center gap-1.5">
-                Pouls Studio
-                <span className="text-[10px] font-mono font-semibold px-1.5 py-0.2 rounded-full bg-[#5B3DF5]/30 text-[#D9D2FF] border border-[#5B3DF5]/40">
-                  v2.0
-                </span>
-              </span>
+            <div className="flex items-center gap-2">
+              <svg className="h-6 w-6" viewBox="0 0 32 32" aria-hidden="true">
+                <rect width="32" height="32" rx="8" fill="var(--accent)" />
+                <path
+                  d="M5 17h5l3-7 5 13 3-6h6"
+                  fill="none"
+                  stroke="var(--on-accent)"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span className="font-bold tracking-tight text-text">Pouls Studio</span>
             </div>
 
             {/* Sélecteur de produit SaaS */}
