@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  /* Mode clair — identique à index.html */
   --bg: #FAFAF7;
   --surface: #FFFFFF;
   --surface-elevated: #FFFFFF;
@@ -23,8 +24,12 @@
   --error-soft: #FBE6E3;
   --info: #2253B0;
   --info-soft: #E5ECFA;
+  --shadow-sm: 0 1px 2px rgba(20, 24, 28, 0.06);
+  --shadow-md: 0 1px 2px rgba(20, 24, 28, 0.05), 0 8px 24px -8px rgba(20, 24, 28, 0.12);
+  --shadow-lg: 0 2px 4px rgba(20, 24, 28, 0.04), 0 32px 64px -24px rgba(20, 24, 28, 0.22);
 }
 
+/* Mode sombre automatique (navigateur / système OS) — identique à index.html */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0D0F12;
@@ -47,7 +52,38 @@
     --error-soft: rgba(255, 138, 126, 0.12);
     --info: #86AEFF;
     --info-soft: rgba(134, 174, 255, 0.12);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.03), 0 32px 64px -24px rgba(0, 0, 0, 0.8);
   }
+}
+
+/* Support de la classe .dark explicite */
+:root[data-theme="dark"],
+.dark {
+  --bg: #0D0F12;
+  --surface: #14171C;
+  --surface-elevated: #1A1E24;
+  --surface-sunken: #101317;
+  --border: #262B33;
+  --border-strong: #363C46;
+  --text: #ECEEF1;
+  --text-2: #A3A9B4;
+  --accent: #3DD6A3;
+  --accent-hover: #67E2B8;
+  --accent-soft: rgba(61, 214, 163, 0.12);
+  --on-accent: #052419;
+  --secondary: #D9DEE6;
+  --success: #3DD6A3;
+  --warning: #F2B552;
+  --warning-soft: rgba(242, 181, 82, 0.12);
+  --error: #FF8A7E;
+  --error-soft: rgba(255, 138, 126, 0.12);
+  --info: #86AEFF;
+  --info-soft: rgba(134, 174, 255, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.03), 0 32px 64px -24px rgba(0, 0, 0, 0.8);
 }
 
 html {
